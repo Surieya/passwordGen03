@@ -1,4 +1,4 @@
-import { SafeAreaView, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { Pressable, SafeAreaView, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import React, { useState } from 'react'
 
 //Form Validation
@@ -15,7 +15,7 @@ const PasswordSchema = Yup.object().shape({
 
 export default function App() {
   const [password, setPassword] = useState('')
-  const [isPassGenerated, setIsPassGenrated] = useState(false);
+  const [isPassGenerated, setIsPassGenerated] = useState(false);
 
   const [lowerCase, setLowerCase] = useState(true)
   const [upperCase, setUpperCase] = useState(false);
@@ -44,7 +44,7 @@ export default function App() {
     const passwordResult = createPassword(characterList, passwordLength)
     
     setPassword(passwordResult)
-    setIsPassGenrated(true)
+    setIsPassGenerated(true)
   }
 
   const createPassword = (characters: string, passwordLength: number) => {
@@ -60,7 +60,7 @@ export default function App() {
   const resetPasswordState = () => {
     //
     setPassword('');
-    setIsPassGenrated(false);
+    setIsPassGenerated(false);
     setLowerCase(true);
     setUpperCase(false);
     setNumbers(false);
@@ -150,13 +150,16 @@ export default function App() {
                   />
                 </View>
   <View style={styles.formActions}>
-          <TouchableOpacity
+          <Pressable
           disabled={!isValid}
           style={styles.primaryBtn}
-          onPress={() => handleSubmit}
+         onPress={(event) => {
+           handleSubmit();
+          event.preventDefault(); 
+  }}
           >
             <Text style={styles.primaryBtnTxt}>Generate Password</Text>
-          </TouchableOpacity>
+          </Pressable>
           <TouchableOpacity
           style={styles.secondaryBtn}
           onPress={ () => {

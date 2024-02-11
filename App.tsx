@@ -67,6 +67,7 @@ export default function App() {
     setSymbols(false)
 
   }
+  // console.log("fff");
   return (
     <ScrollView keyboardShouldPersistTaps="handled">
       <SafeAreaView style={styles.appContainer}>
